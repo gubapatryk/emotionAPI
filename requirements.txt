@@ -1,0 +1,6 @@
+uvicorn[standard]
+gunicorn
+fastapi
+aiofiles
+python-jose
+passlib
