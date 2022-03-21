@@ -3,11 +3,21 @@ from fastapi.responses import FileResponse
 import os
 from random import randint
 import uuid
+from fastapi.middleware.cors import CORSMiddleware
 
 IMAGEDIR = "/fastapi-images/"
 os.mkdir(IMAGEDIR)
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/images/")
@@ -20,7 +30,16 @@ async def create_upload_file(file: UploadFile = File(...)):
     with open(f"{IMAGEDIR}{file.filename}", "wb") as f:
         f.write(contents)
 
-    return {"filename": file.filename}
+    return {"score": {
+            "happy" : 90,
+            "sad" : 10,
+            "confused" : 30
+            },
+            "arrows": [
+                [10,10,20,20],
+                [30,40,15,10]
+            ]
+        }
 
 
 @app.get("/images/")
