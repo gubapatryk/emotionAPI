@@ -36,8 +36,8 @@ async def create_upload_file(file: UploadFile = File(...)):
             "confused" : 30
             },
             "arrows": [
-                [10,10,20,20],
-                [30,40,15,10]
+                [100,100,200,200],
+                [150,120,150,100]
             ]
         }
 

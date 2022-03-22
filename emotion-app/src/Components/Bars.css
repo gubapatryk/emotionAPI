@@ -1,0 +1,22 @@
+#myBars {
+  width: 100%;
+  background-color: #552c34;
+  color: white;
+}
+
+#barHappy {
+    background-color: lightgreen;
+}
+
+#barSad {
+    background-color: red;
+}
+
+#barConfused {
+    background-color: yellow;
+}
+
+.myBar {
+  width: 0%;
+  height: 30px;
+}

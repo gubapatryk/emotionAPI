@@ -24,11 +24,13 @@ export default class Mirror extends Component {
             var video = null;
             var canvas = null;
             var startbutton = null;
+            var arrowbutton = null;
 
             function startup() {
                 video = document.getElementById('video');
                 canvas = document.getElementById('canvas');
                 startbutton = document.getElementById('startbutton');
+                arrowbutton = document.getElementById('arrowbutton');
 
                 navigator.mediaDevices.getUserMedia({ video: true, audio: false })
                     .then(function (stream) {
@@ -60,6 +62,11 @@ export default class Mirror extends Component {
 
                 startbutton.addEventListener('click', function (ev) {
                     takepicture();
+                    ev.preventDefault();
+                }, false);
+
+                arrowbutton.addEventListener('click', function (ev) {
+                    drawarrows();
                     ev.preventDefault();
                 }, false);
 
@@ -102,7 +109,61 @@ export default class Mirror extends Component {
                             })
                             .then(function (response) {
                             //Tu mamy JSON z wynikiem analizy obrazka z kamery
-                              console.log(response.data);
+                                console.log(response.data);
+                                var happyBar = document.getElementById("barHappy");
+                                happyBar.style.width = response.data.score.happy + "%";
+                                var sadBar = document.getElementById("barSad");
+                                sadBar.style.width = response.data.score.sad + "%";
+                                var confusedBar = document.getElementById("barConfused");
+                                confusedBar.style.width = response.data.score.confused + "%";
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    });
+                } else {
+                    clearphoto();
+                }
+            }
+
+            function canvas_arrow(context, fromx, fromy, tox, toy) {
+                var headlen = 4; // length of head in pixels
+                var dx = tox - fromx;
+                var dy = toy - fromy;
+                var angle = Math.atan2(dy, dx);
+                context.moveTo(fromx, fromy);
+                context.lineTo(tox, toy);
+                context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+                context.moveTo(tox, toy);
+                context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+            }
+
+            function drawarrows() {
+                var context = canvas.getContext('2d');
+                if (width && height) {
+                    canvas.width = width;
+                    canvas.height = height;
+                    context.drawImage(video, 0, 0, width, height);
+
+                    var data = canvas.toDataURL('image/png');
+                    canvas.toBlob(function (blob) {
+                        const formData = new FormData();
+                        formData.append('file', blob);
+                        axios.post('http://localhost:3001/images/', formData,
+                            {
+                                headers: {
+                                    'content-type': 'image/png'
+                                }
+                            })
+                            .then(function (response) {
+                            //Tu mamy JSON z wynikiem analizy obrazka z kamery
+                                console.log(response.data.arrows);
+                                context.beginPath();
+                                for (var i = 0; i < response.data.arrows.length; i++) {
+                                    var arrow = response.data.arrows[i];
+                                    canvas_arrow(context, arrow[0], arrow[1], arrow[2], arrow[3]);
+                                }
+                                context.stroke();
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -125,7 +186,9 @@ export default class Mirror extends Component {
                 <p>Camera component.</p>
                 <div className="camera">
                     <video id="video">Video stream not available.</video>
+                    <p/>
                     <button id="startbutton">Take photo</button>
+                    <button id="arrowbutton">Draw arrows</button>
                 </div>
                 <canvas id="canvas">
                 </canvas>
