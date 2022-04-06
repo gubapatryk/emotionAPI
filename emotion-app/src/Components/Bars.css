@@ -4,16 +4,36 @@
   color: white;
 }
 
-#barHappy {
-    background-color: lightgreen;
+#barAnger {
+    background-color: #e72222;
 }
 
-#barSad {
-    background-color: red;
+#barContempt {
+    background-color: #4886A0;
 }
 
-#barConfused {
-    background-color: yellow;
+#barDisgust {
+    background-color: #9acd32;
+}
+
+#barFear {
+    background-color: #2f2323;
+}
+
+#barHappiness {
+    background-color: #8cff1f;
+}
+
+#barNeutral {
+    background-color: #f6efd0;
+}
+
+#barSadness {
+    background-color: #2a3b90;
+}
+
+#barSurprise {
+    background-color: #c9936f;
 }
 
 .myBar {

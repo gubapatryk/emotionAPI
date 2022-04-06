@@ -4,6 +4,9 @@ import os
 from random import randint
 import uuid
 from fastapi.middleware.cors import CORSMiddleware
+import json
+
+import app.detection_model as dm
 
 IMAGEDIR = "/fastapi-images/"
 os.mkdir(IMAGEDIR)
@@ -19,27 +22,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.post("/images/")
 async def create_upload_file(file: UploadFile = File(...)):
-
     file.filename = f"{uuid.uuid4()}.jpg"
-    contents = await file.read()  # <-- Important!
-
-    # example of how you can save the file
-    with open(f"{IMAGEDIR}{file.filename}", "wb") as f:
-        f.write(contents)
-
-    return {"score": {
-            "happy" : 90,
-            "sad" : 10,
-            "confused" : 30
-            },
-            "arrows": [
-                [100,100,200,200],
-                [150,120,150,100]
-            ]
-        }
+    result = await dm.emotions(file)
+    print(type(result))
+    return result
 
 
 @app.get("/images/")

@@ -6,14 +6,23 @@ export default class Bars extends Component {
     render() {
         return (
             <div>
-                <p>Bars component. XD</p>
                 <div id="myBars">
-                    happy
-                    <div id="barHappy" className="myBar"></div>
-                    sad z jabłkami
-                    <div id="barSad" className="myBar"></div>
-                    confused
-                    <div id="barConfused" className="myBar"></div>
+                    anger
+                    <div id="barAnger" className="myBar"></div>
+                    contempt
+                    <div id="barContempt" className="myBar"></div>
+                    disgust
+                    <div id="barDisgust" className="myBar"></div>
+                    fear
+                    <div id="barFear" className="myBar"></div>
+                    happiness
+                    <div id="barHappiness" className="myBar"></div>
+                    neutral
+                    <div id="barNeutral" className="myBar"></div>
+                    sadness
+                    <div id="barSadness" className="myBar"></div>
+                    surprise
+                    <div id="barSurprise" className="myBar"></div>
                 </div>
             </div>
         )

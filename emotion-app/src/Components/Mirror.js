@@ -109,13 +109,24 @@ export default class Mirror extends Component {
                             })
                             .then(function (response) {
                             //Tu mamy JSON z wynikiem analizy obrazka z kamery
-                                console.log(response.data);
-                                var happyBar = document.getElementById("barHappy");
-                                happyBar.style.width = response.data.score.happy + "%";
-                                var sadBar = document.getElementById("barSad");
-                                sadBar.style.width = response.data.score.sad + "%";
-                                var confusedBar = document.getElementById("barConfused");
-                                confusedBar.style.width = response.data.score.confused + "%";
+                                console.log(response);
+                                var barAnger = document.getElementById("barAnger");
+                                barAnger.style.width = 100.0 * response.data.anger + "%";
+                                var barContempt = document.getElementById("barContempt");
+                                barContempt.style.width = 100.0 * response.data.contempt + "%";
+                                var barDisgust = document.getElementById("barDisgust");
+                                barDisgust.style.width = 100.0 * response.data.disgust + "%";
+                                var barFear = document.getElementById("barFear");
+                                barFear.style.width = 100.0 * response.data.fear + "%";
+                                var barHappiness = document.getElementById("barHappiness");
+                                barHappiness.style.width = 100.0 * response.data.happiness + "%";
+                                var barNeutral = document.getElementById("barNeutral");
+                                barNeutral.style.width = 100.0 * response.data.neutral + "%";
+                                var barSadness = document.getElementById("barSadness");
+                                barSadness.style.width = 100.0 * response.data.sadness + "%";
+                                var barSurprise = document.getElementById("barSurprise");
+                                barSurprise.style.width = 100.0 * response.data.surprise + "%";
+
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -183,7 +194,6 @@ export default class Mirror extends Component {
     render() {
         return (
             <div>
-                <p>Camera component.</p>
                 <div className="camera">
                     <video id="video">Video stream not available.</video>
                     <p/>
