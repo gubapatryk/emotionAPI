@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import './Bars.css';
 
 export default class Bars extends Component {
     render() {
         return (
             <div>
-                <div id="myBars">
+                <div id="my_bars">
                     anger
-                    <div id="barAnger" className="myBar"></div>
+                    <div id="bar_anger" className="my_bar"></div>
                     contempt
-                    <div id="barContempt" className="myBar"></div>
+                    <div id="bar_contempt" className="my_bar"></div>
                     disgust
-                    <div id="barDisgust" className="myBar"></div>
+                    <div id="bar_disgust" className="my_bar"></div>
                     fear
-                    <div id="barFear" className="myBar"></div>
+                    <div id="bar_fear" className="my_bar"></div>
                     happiness
-                    <div id="barHappiness" className="myBar"></div>
+                    <div id="bar_happiness" className="my_bar"></div>
                     neutral
-                    <div id="barNeutral" className="myBar"></div>
+                    <div id="bar_neutral" className="my_bar"></div>
                     sadness
-                    <div id="barSadness" className="myBar"></div>
+                    <div id="bar_sadness" className="my_bar"></div>
                     surprise
-                    <div id="barSurprise" className="myBar"></div>
+                    <div id="bar_surprise" className="my_bar"></div>
                 </div>
             </div>
         )

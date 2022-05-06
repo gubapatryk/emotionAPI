@@ -1,18 +1,13 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import FileResponse
 import os
-from random import randint
-import uuid
 from fastapi.middleware.cors import CORSMiddleware
-import json
-
-import app.detection_model as dm
+import app.emotion_detection as ed
+import app.face_comparison as fc
 
 IMAGEDIR = "/fastapi-images/"
 os.mkdir(IMAGEDIR)
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,22 +17,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/images/")
-async def create_upload_file(file: UploadFile = File(...)):
-    file.filename = f"{uuid.uuid4()}.jpg"
-    result = await dm.emotions(file)
-    print(type(result))
+@app.post("/emotions/")
+async def analyze_emotions(image_file: UploadFile = File(...)):
+    result = await ed.emotions(image_file)
+    print("result of emotion detection", result)
     return result
 
-
-@app.get("/images/")
-async def read_random_file():
-
-    # get a random file from the image directory
-    files = os.listdir(IMAGEDIR)
-    random_index = randint(0, len(files) - 1)
-
-    path = f"{IMAGEDIR}{files[random_index]}"
-
-    # notice you can use FileResponse now because it expects a path
-    return FileResponse(path)
+@app.post("/compare/")
+async def compare_faces(actor_face_file: UploadFile = File(...), user_face_file: UploadFile = File(...)):
+    result = await fc.compare_faces(actor_face_file, user_face_file)
+    print("result of comparison", result)
+    return result
