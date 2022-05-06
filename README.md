@@ -13,5 +13,6 @@ npm install(?)
 npm start
 ```
 
-Aby wyciągnąć emocje z obrazka, należy najpierw cynkąć zdjęcie "take picture" i wybrać plik ze zdjęciem aktora, a następnie klinąć przycisk compare.
+Aby wyciągnąć emocje z obrazka, należy najpierw cynkąć zdjęcie "Take photo" i potem dopiero "Extract emotions"
+Analogicznie żeby porównać się z aktorem należy najpierw cyknąć fotkę i wybrać plik ze zdjęciem aktora, a następnie klinąć przycisk "Compare us :D".
 (wynik pokaże się na dole)
