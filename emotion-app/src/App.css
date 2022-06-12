@@ -37,6 +37,7 @@
   }
 }
 .grid-container {
+  margin: 20px;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
@@ -46,6 +47,36 @@
                -7px -7px 24px #47526b;
 }
 .grid-item {
+  padding: 0px 50px 0px 50px;
   font-size: 30px;
   text-align: center;
+}
+
+#startbutton {
+  user-select: none; 
+  font-size: 22px; 
+  padding: 3px 18px; 
+  background: rgba(0, 0, 0, 0) linear-gradient(rgba(251,221,11,0.89), rgba(231,147,2,0.72)) repeat scroll 0% 0%;
+   border-radius: 12px; 
+   color: rgb(255, 255, 255);
+}
+
+#emotions_button {
+  margin: 20px 0px 10px 0px;
+  user-select: none; 
+  font-size: 28px; 
+  padding: 9px 24px; 
+  background: rgba(0, 0, 0, 0) linear-gradient(rgba(80, 251, 11, 0.89), rgba(30, 126, 30, 0.72)) repeat scroll 0% 0%;
+   border-radius: 12px; 
+   color: rgb(255, 255, 255);
+}
+
+#comparebutton {
+  margin: 20px 0px 10px 0px;
+  user-select: none; 
+  font-size: 28px; 
+  padding: 9px 24px; 
+  background: rgba(0, 0, 0, 0) linear-gradient(rgba(80, 251, 11, 0.89), rgba(30, 126, 30, 0.72)) repeat scroll 0% 0%;
+   border-radius: 12px; 
+   color: rgb(255, 255, 255);
 }

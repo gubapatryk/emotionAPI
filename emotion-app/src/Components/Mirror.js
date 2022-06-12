@@ -5,7 +5,7 @@ export default class Mirror extends Component {
 	constructor(props) {
 		super(props);
 		(function () {
-			var apiUrl = 'wereta.es:3001'
+			//var apiUrl = 'wereta.es:3001'
 			// The width and height of the captured photo. We will set the
 			// width to the value defined here, but the height will be
 			// calculated based on the aspect ratio of the input stream.
@@ -200,7 +200,7 @@ export default class Mirror extends Component {
 
 	render() {
 		return (
-			<div>
+			<div style={{padding: '20px 0px 0px 0px'}}>
 				<div className="camera">
 					<video id="video">Video stream not available.</video>
 					<br/>
@@ -211,8 +211,11 @@ export default class Mirror extends Component {
 				<canvas id="canvas">
 				</canvas>
 					<br/>
-					<button id="comparebutton">Compare us :D</button>
-					<input type='file' id='inputfile'/>
+					Comparing photos
+					<br/>
+					<button id="comparebutton">Compare us</button>
+					<br/>
+					<input type='file' id='inputfile' />
 				</div>
 				<canvas id="canvas-celebrity">
 				</canvas>

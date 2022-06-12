@@ -7,21 +7,29 @@ export default class Bars extends Component {
             <div>
                 <div id="my_bars">
                     anger
-                    <div id="bar_anger" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_anger" class="bar"></span></div>
                     contempt
-                    <div id="bar_contempt" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_contempt" class="bar"></span></div>
                     disgust
-                    <div id="bar_disgust" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_disgust" class="bar"></span></div>
                     fear
-                    <div id="bar_fear" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_fear" class="bar"></span></div>
                     happiness
-                    <div id="bar_happiness" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_happiness" class="bar"></span></div>
                     neutral
-                    <div id="bar_neutral" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_neutral" class="bar"></span></div>
                     sadness
-                    <div id="bar_sadness" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_sadness" class="bar"></span></div>
                     surprise
-                    <div id="bar_surprise" className="my_bar"></div>
+                    <div class="meter">
+                        <span id="bar_surprise" class="bar"></span></div>
                 </div>
             </div>
         )
