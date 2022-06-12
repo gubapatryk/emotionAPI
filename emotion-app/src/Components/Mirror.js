@@ -76,6 +76,11 @@ export default class Mirror extends Component {
 					if(picture_taken && file_input.files.length > 0){
 						compare_faces();
 					}else{
+						var ctx = celebrity_canvas.getContext("2d");
+						ctx.font = "24px Arial";
+						ctx.fillStyle = "white";
+						ctx.fillText("Please choose a file", 30, 50); 
+						ctx.fillText("and take a picture first!", 20, 80); 
 						console.log("Please choose a file and take a picture first :D");
 					}
 					ev.preventDefault();
