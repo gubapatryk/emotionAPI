@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios'
 
 export default class Mirror extends Component {
-
 	constructor(props) {
 		super(props);
 		(function () {
+			var apiUrl = 'wereta.es:3001'
 			// The width and height of the captured photo. We will set the
 			// width to the value defined here, but the height will be
 			// calculated based on the aspect ratio of the input stream.
@@ -28,10 +28,12 @@ export default class Mirror extends Component {
 			var file_input = null;
 			var compare_button = null;
 			var picture_taken = false;
+			var celebrity_canvas = null;
 
 			function start_up() {
 				video = document.getElementById('video');
 				canvas = document.getElementById('canvas');
+				celebrity_canvas = document.getElementById('canvas-celebrity');
 				start_button = document.getElementById('startbutton');
 				emotions_button = document.getElementById('emotions_button');
 				file_input = document.getElementById('inputfile');
@@ -79,6 +81,30 @@ export default class Mirror extends Component {
 					ev.preventDefault();
 				}, false);
 				clear_photo();
+				
+			file_input.onchange = function() {
+				console.log("dodano plik");
+				const file    = file_input.files[0]; // get the file
+				const blobURL = URL.createObjectURL(file);
+				const img     = new Image();
+				img.src       = blobURL;
+			  
+				img.onerror = function () {
+				  URL.revokeObjectURL(this.src);
+				  // Handle the failure properly
+				  console.log("Cannot load image");
+				};
+				img.onload = function () {
+					//height = video.videoHeight / (video.videoWidth / width);
+					console.log(img.height);
+					var height = img.height / (img.width / 320);
+					celebrity_canvas.setAttribute('width', width);
+					celebrity_canvas.setAttribute('height', height);
+					URL.revokeObjectURL(this.src);
+					const ctx     = celebrity_canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, width, height);
+				}
+			}
 			}
 
 
@@ -113,7 +139,7 @@ export default class Mirror extends Component {
 					canvas.toBlob(function (blob) {
 						const form_data = new FormData();
 						form_data.append('image_file', blob);
-						axios.post('http://localhost:3001/emotions/', form_data, {
+						axios.post(`https://api.wereta.es/emotions/`, form_data, {
 							headers: {
 								'content-type': 'image/png'
 							}
@@ -143,6 +169,7 @@ export default class Mirror extends Component {
 					clear_photo();
 				}
 			}
+			
 
 
 			function compare_faces() {
@@ -150,7 +177,7 @@ export default class Mirror extends Component {
 				form_data.append('actor_face_file', file_input.files[0]);
 				canvas.toBlob(function (blob) {
 					form_data.append('user_face_file', blob, 'uploaded2.png');
-					axios.post('http://localhost:3001/compare/', form_data, {
+					axios.post(`https://api.wereta.es/compare/`, form_data, {
 						headers: {
 							'content-type': 'image/png'
 						}
@@ -181,10 +208,13 @@ export default class Mirror extends Component {
 					<br/>
 					<button id="emotions_button">Extract emotions</button>
 					<br/>
+				<canvas id="canvas">
+				</canvas>
+					<br/>
 					<button id="comparebutton">Compare us :D</button>
 					<input type='file' id='inputfile'/>
 				</div>
-				<canvas id="canvas">
+				<canvas id="canvas-celebrity">
 				</canvas>
 			</div>
 		)
